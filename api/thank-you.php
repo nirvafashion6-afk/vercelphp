@@ -206,11 +206,11 @@ function gtag(){
 
 gtag('js', new Date());
 
-gtag('config', '');
+gtag('config', 'AW-18084378359');
 
 /* Purchase Conversion Event */
 gtag('event', 'conversion', {
-    'send_to': '/',
+    'send_to': 'AW-18084378359/',
     'value': <?php echo $amount; ?>,
     'currency': 'INR',
     'transaction_id': '<?php echo $order_id; ?>'
