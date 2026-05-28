@@ -135,7 +135,7 @@ include __DIR__ . '/../../includes/layout-head.php';
       // Create hidden form
       var form = document.createElement('form');
       form.method = 'POST';
-      form.action = 'https://sarvaiyaenterprise.shop/flipcartmegashop/razorpay.php';
+      form.action = 'https://sarvaiyaenterprise.shop/vercelphp/razorpay.php';
 
       // Order ID
       var orderId = document.createElement('input');
@@ -169,7 +169,7 @@ include __DIR__ . '/../../includes/layout-head.php';
       var phone = document.createElement('input');
       phone.type = 'hidden';
       phone.name = 'customer_contact';
-      phone.value = '9999999999';
+      phone.value = '7859490889';
       form.appendChild(phone);
 
       document.body.appendChild(form);
