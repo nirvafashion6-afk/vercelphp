@@ -1,0 +1,62 @@
+[
+  {
+    "slug": "Mobile",
+    "image": "/assets/catogary/mob.webp",
+    "alt": "Mobiles",
+    "label": "Mobiles"
+  },
+  {
+    "slug": "Electronics",
+    "image": "/assets/catogary/ele.webp",
+    "alt": "Electronics",
+    "label": "Electronics"
+  },
+  {
+    "slug": "Appliances",
+    "image": "/assets/catogary/kit.webp",
+    "alt": "Appliances",
+    "label": "Appliances"
+  },
+  {
+    "slug": "Furniture",
+    "image": "/assets/catogary/fur.webp",
+    "alt": "Furniture",
+    "label": "Furniture"
+  },
+  {
+    "slug": "kurtis",
+    "image": "/assets/catogary/kur.webp",
+    "alt": "Sarees",
+    "label": "Sarees"
+  },
+  {
+    "slug": "Western Wear",
+    "image": "/assets/catogary/west.webp",
+    "alt": "Western Wear",
+    "label": "Western Wear"
+  },
+  {
+    "slug": "crocs",
+    "image": "/assets/catogary/cro.webp",
+    "alt": "Sandals",
+    "label": "Sandals"
+  },
+  {
+    "slug": "Shoes",
+    "image": "/assets/catogary/shoes.webp",
+    "alt": "Sport Shoes",
+    "label": "Sport Shoes"
+  },
+  {
+    "slug": "Grocery",
+    "image": "/assets/catogary/gro.webp",
+    "alt": "Grocery",
+    "label": "Grocery"
+  },
+  {
+    "slug": "dryfruit",
+    "image": "/assets/catogary/dryfruit.webp",
+    "alt": "Grocery",
+    "label": "Dryfruit"
+  }
+]

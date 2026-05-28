@@ -1,7 +1,0 @@
-{
-  "name": "vercel-php-demo",
-  "private": true,
-  "dependencies": {
-    "vercel-php": "^0.7.4"
-  }
-}
