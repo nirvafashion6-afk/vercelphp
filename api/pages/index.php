@@ -8,7 +8,7 @@ $categories = get_categories();
 $first_page = paginate($products, 1, $PAGE_SIZE);
 $total      = count($products);
 
-$page_title = 'Shop Online for Fashion, Electronics & More | BHAVYA ENTERPRISE';
+$page_title = 'Shop Online for Fashion, Electronics & More | FLIP MART';
 $menu_categories = $categories;
 include __DIR__ . '/../../includes/layout-head.php';
 ?>

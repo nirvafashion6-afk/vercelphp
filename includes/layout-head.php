@@ -1,7 +1,7 @@
 <?php
 // Shared <head> + scripts (Bootstrap, icons, Facebook Pixel, etc.)
-$page_title = $page_title ?? 'BHAVYA ENTERPRISE';
-$page_description = $page_description ?? 'Discover the best deals at BHAVYA ENTERPRISE. Shop online for the latest in fashion, electronics, home goods, and more.';
+$page_title = $page_title ?? 'FLIP MART';
+$page_description = $page_description ?? 'Discover the best deals at FLIP MART. Shop online for the latest in fashion, electronics, home goods, and more.';
 ?><!DOCTYPE html>
 <html lang="en-IN">
 <head>

@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../../includes/data.php';
 require_once __DIR__ . '/../../includes/helpers.php';
-$page_title = 'Contact Us | BHAVYA ENTERPRISE';
+$page_title = 'Contact Us | FLIP MART';
 $show_search = false;
 include __DIR__ . '/../../includes/layout-head.php';
 ?>

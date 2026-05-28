@@ -6,7 +6,7 @@ $category   = $_GET['category'] ?? '';
 $products   = get_products_by_category($category);
 $categories = get_categories();
 
-$page_title = ($category ?: 'Category') . ' | BHAVYA ENTERPRISE';
+$page_title = ($category ?: 'Category') . ' | FLIP MART';
 $menu_categories = $categories;
 include __DIR__ . '/../../includes/layout-head.php';
 ?>

@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-4 mb-3 mb-md-0">
-        <h5>BHAVYA ENTERPRISE</h5>
+        <h5>FLIP MART</h5>
         <p>Shop the latest trends in fashion, electronics, and home goods. Experience fast delivery and secure payments with us.</p>
       </div>
       <div class="col-md-3 mb-3 mb-md-0">
@@ -26,7 +26,7 @@
       </div>
     </div>
     <hr class="mt-4 mb-3" />
-    <div class="text-center"><p class="mb-0">&copy; 2026 BHAVYA ENTERPRISE. All rights reserved.</p></div>
+    <div class="text-center"><p class="mb-0">&copy; 2026 FLIP MART. All rights reserved.</p></div>
   </div>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

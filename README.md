@@ -1,4 +1,4 @@
-# BHAVYA ENTERPRISE — PHP version
+# FLIP MART — PHP version
 
 A PHP port of the original Next.js storefront. Pages render server-side
 PHP HTML; the cart/checkout state lives in `localStorage` (same as the
