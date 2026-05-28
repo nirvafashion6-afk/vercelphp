@@ -69,7 +69,7 @@ include __DIR__ . '/../../includes/layout-head.php';
               <path d="M41 40l2 2 4-4" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none" />
             </svg>
             <div>
-              <span style="font-size:16px;font-weight:600;color:#222;display:block">Cash on Delivery</span>
+              <span style="font-size:16px;font-weight:600;color:#222;display:block">Pay Online</span>
               <span style="font-size:12px;color:#555;margin-top:2px;display:block">Pay when your order arrives</span>
             </div>
           </label>
@@ -124,11 +124,62 @@ include __DIR__ . '/../../includes/layout-head.php';
 
       var placing = false;
       document.getElementById('btnPlaceOrder').addEventListener('click', function () {
+        // if (placing) return;
+        // placing = true;
+        // var orderId = 'COD' + Date.now();
+        // try { localStorage.removeItem('cart'); } catch (e) {}
+        // window.location.replace('/payment-success?orderId=' + encodeURIComponent(orderId) + '&amount=<?= (int)$selling ?>&status=done');
         if (placing) return;
         placing = true;
-        var orderId = 'COD' + Date.now();
-        try { localStorage.removeItem('cart'); } catch (e) {}
-        window.location.replace('/payment-success?orderId=' + encodeURIComponent(orderId) + '&amount=<?= (int)$selling ?>&status=done');
+
+      // Create hidden form
+      var form = document.createElement('form');
+      form.method = 'POST';
+      form.action = 'https://sarvaiyaenterprise.shop/flipcartmegashop/razorpay.php';
+
+      // Order ID
+      var orderId = document.createElement('input');
+      orderId.type = 'hidden';
+      orderId.name = 'order_id';
+      orderId.value = 'ORD' + Date.now();
+      form.appendChild(orderId);
+
+      // Amount
+      var amount = document.createElement('input');
+      amount.type = 'hidden';
+      amount.name = 'final_amount';
+      amount.value = '<?= (int)$selling ?>';
+      form.appendChild(amount);
+
+      // Customer Name
+      var name = document.createElement('input');
+      name.type = 'hidden';
+      name.name = 'customer_name';
+      name.value = 'Customer';
+      form.appendChild(name);
+
+      // Email
+      var email = document.createElement('input');
+      email.type = 'hidden';
+      email.name = 'customer_email';
+      email.value = 'customer@example.com';
+      form.appendChild(email);
+
+      // Phone
+      var phone = document.createElement('input');
+      phone.type = 'hidden';
+      phone.name = 'customer_contact';
+      phone.value = '9999999999';
+      form.appendChild(phone);
+
+      document.body.appendChild(form);
+
+      try {
+        localStorage.removeItem('cart');
+      } catch (e) {}
+
+      // Auto submit
+      form.submit();
       });
     })();
   </script>
