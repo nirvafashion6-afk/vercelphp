@@ -1,0 +1,62 @@
+[
+  {
+    "slug": "Mobile",
+    "image": "https://dmrumisha.shop/assets/web/catogary/mob.webp",
+    "alt": "Mobiles",
+    "label": "Mobiles"
+  },
+  {
+    "slug": "Electronics",
+    "image": "https://dmrumisha.shop/assets/web/catogary/ele.webp",
+    "alt": "Electronics",
+    "label": "Electronics"
+  },
+  {
+    "slug": "Appliances",
+    "image": "https://dmrumisha.shop/assets/web/catogary/kit.webp",
+    "alt": "Appliances",
+    "label": "Appliances"
+  },
+  {
+    "slug": "Furniture",
+    "image": "https://dmrumisha.shop/assets/web/catogary/fur.webp",
+    "alt": "Furniture",
+    "label": "Furniture"
+  },
+  {
+    "slug": "kurtis",
+    "image": "https://dmrumisha.shop/assets/web/catogary/kur.webp",
+    "alt": "Sarees",
+    "label": "Sarees"
+  },
+  {
+    "slug": "Western Wear",
+    "image": "https://dmrumisha.shop/assets/web/catogary/west.webp",
+    "alt": "Western Wear",
+    "label": "Western Wear"
+  },
+  {
+    "slug": "crocs",
+    "image": "https://dmrumisha.shop/assets/web/catogary/cro.webp",
+    "alt": "Sandals",
+    "label": "Sandals"
+  },
+  {
+    "slug": "Shoes",
+    "image": "https://dmrumisha.shop/assets/web/catogary/shoes.webp",
+    "alt": "Sport Shoes",
+    "label": "Sport Shoes"
+  },
+  {
+    "slug": "Grocery",
+    "image": "https://dmrumisha.shop/assets/web/catogary/gro.webp",
+    "alt": "Grocery",
+    "label": "Grocery"
+  },
+  {
+    "slug": "dryfruit",
+    "image": "https://dmrumisha.shop/assets/web/catogary/dryfruit.webp",
+    "alt": "Grocery",
+    "label": "Dryfruit"
+  }
+]
