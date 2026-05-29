@@ -16,7 +16,15 @@ $page_description = $page_description ?? 'Discover the best deals at FLIP MART. 
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
   <link rel="stylesheet" href="/styles/globals.css" />
   <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+  <!-- Google Ads Global Tag -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16800584502"></script>
   <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-16800584502');
+  </script>
+  <!-- <script>
     // Pull pixel/UPI config once on page load, mirroring _app.js behaviour.
     (function () {
       try {
@@ -37,6 +45,6 @@ $page_description = $page_description ?? 'Discover the best deals at FLIP MART. 
           .catch(function () {});
       } catch (e) {}
     })();
-  </script>
+  </script> -->
 </head>
 <body>

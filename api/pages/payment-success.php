@@ -18,24 +18,46 @@ include __DIR__ . '/../../includes/layout-head.php';
     <a href="/" class="btn btn-primary mt-4 px-5 py-2">Continue Shopping</a>
   </div>
 
-  <script>
-    (function () {
-      try { localStorage.removeItem('cart'); } catch (e) {}
-      var amount = <?= json_encode($amount) ?>;
-      var orderId = <?= json_encode($orderId) ?>;
-      var v = Number(amount) || 0;
-      if (typeof window.fbq === 'function' && v > 0) {
+<script>
+(function () {
+    try { localStorage.removeItem('cart'); } catch (e) {}
+
+    var amount = <?= json_encode((float)$amount) ?>;
+    var orderId = <?= json_encode($orderId) ?>;
+    var v = Number(amount) || 0;
+
+    // Prevent duplicate tracking in same browser session
+    if (sessionStorage.getItem('purchase_tracked')) {
+        return;
+    }
+
+    // Facebook Purchase Event
+    // if (typeof window.fbq === 'function' && v > 0) {
+    //     try {
+    //         window.fbq('track', 'Purchase', {
+    //             value: v,
+    //             currency: 'INR',
+    //             content_ids: orderId ? [String(orderId)] : undefined,
+    //             content_type: 'product'
+    //         });
+    //     } catch (e) {}
+    // }
+
+    // Google Ads Purchase Conversion
+    if (typeof window.gtag === 'function' && v > 0) {
         try {
-          window.fbq('track', 'Purchase', {
-            value: v,
-            currency: 'INR',
-            content_ids: orderId ? [String(orderId)] : undefined,
-            content_type: 'product'
-          });
+            gtag('event', 'conversion', {
+                'send_to': 'AW-16800584502/v6ynCPvg9rQcELamkss-',
+                'value': v,
+                'currency': 'INR',
+                'transaction_id': orderId
+            });
         } catch (e) {}
-      }
-    })();
-  </script>
+    }
+
+    sessionStorage.setItem('purchase_tracked', 'true');
+})();
+</script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
