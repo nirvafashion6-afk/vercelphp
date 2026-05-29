@@ -1,33 +1,110 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "functions": {
-    "api/**/*.php": { "runtime": "vercel-php@0.7.3" }
+    "api/**/*.php": {
+      "runtime": "vercel-php@0.7.3"
+    }
   },
   "routes": [
-    { "src": "/api/products",             "dest": "/api/products.php" },
-    { "src": "/api/upichange",            "dest": "/api/upichange.php" },
-    { "src": "/api/facebookPixel",        "dest": "/api/facebookPixel.php" },
-    { "src": "/api/initiate-payment",     "dest": "/api/initiate-payment.php" },
-    { "src": "/api/verify-payment",       "dest": "/api/verify-payment.php" },
-    { "src": "/api/payment-notification", "dest": "/api/payment-notification.php" },
-
-    { "src": "/",                  "dest": "/api/pages/index.php" },
-    { "src": "/category",          "dest": "/api/pages/category.php" },
-    { "src": "/product",           "dest": "/api/pages/product.php" },
-    { "src": "/cart",              "dest": "/api/pages/cart.php" },
-    { "src": "/checkout",          "dest": "/api/pages/checkout.php" },
-    { "src": "/order-summary",     "dest": "/api/pages/order-summary.php" },
-    { "src": "/payment",           "dest": "/api/pages/payment.php" },
-    { "src": "/payment/(.*)",      "dest": "/api/pages/payment.php?id=$1" },
-    { "src": "/payment-success",   "dest": "/api/pages/payment-success.php" },
-    { "src": "/payment-failed",    "dest": "/api/pages/payment-failed.php" },
-    { "src": "/about-us",          "dest": "/api/pages/about-us.php" },
-    { "src": "/contact-us",        "dest": "/api/pages/contact-us.php" },
-    { "src": "/privacy-policy",    "dest": "/api/pages/privacy-policy.php" },
-    { "src": "/terms-conditions",  "dest": "/api/pages/terms-conditions.php" },
-    { "src": "/shipping-policy",   "dest": "/api/pages/shipping-policy.php" },
-    { "src": "/return-policy",     "dest": "/api/pages/return-policy.php" },
-
-    { "src": "/(assets|styles|uploads)/(.*)", "dest": "/$1/$2" }
+    {
+      "src": "/api/products",
+      "dest": "/api/products.php"
+    },
+    {
+      "src": "/api/upichange",
+      "dest": "/api/upichange.php"
+    },
+    {
+      "src": "/api/facebookPixel",
+      "dest": "/api/facebookPixel.php"
+    },
+    {
+      "src": "/api/initiate-payment",
+      "dest": "/api/initiate-payment.php"
+    },
+    {
+      "src": "/api/verify-payment",
+      "dest": "/api/verify-payment.php"
+    },
+    {
+      "src": "/api/payment-notification",
+      "dest": "/api/payment-notification.php"
+    },
+    {
+      "src": "/",
+      "dest": "/api/pages/index.php"
+    },
+    {
+      "src": "/category",
+      "dest": "/api/pages/category.php"
+    },
+    {
+      "src": "/product",
+      "dest": "/api/pages/product.php"
+    },
+    {
+      "src": "/cart",
+      "dest": "/api/pages/cart.php"
+    },
+    {
+      "src": "/checkout",
+      "dest": "/api/pages/checkout.php"
+    },
+    {
+      "src": "/order-summary",
+      "dest": "/api/pages/order-summary.php"
+    },
+    {
+      "src": "/payment",
+      "dest": "/api/pages/payment.php"
+    },
+    {
+      "src": "/payment/(.*)",
+      "dest": "/api/pages/payment.php?id=$1"
+    },
+    {
+      "src": "/payment-success",
+      "dest": "/api/pages/payment-success.php"
+    },
+    {
+      "src": "/payment-failed",
+      "dest": "/api/pages/payment-failed.php"
+    },
+    {
+      "src": "/about-us",
+      "dest": "/api/pages/about-us.php"
+    },
+    {
+      "src": "/contact-us",
+      "dest": "/api/pages/contact-us.php"
+    },
+    {
+      "src": "/privacy-policy",
+      "dest": "/api/pages/privacy-policy.php"
+    },
+    {
+      "src": "/terms-conditions",
+      "dest": "/api/pages/terms-conditions.php"
+    },
+    {
+      "src": "/shipping-policy",
+      "dest": "/api/pages/shipping-policy.php"
+    },
+    {
+      "src": "/return-policy",
+      "dest": "/api/pages/return-policy.php"
+    },
+    {
+      "src": "/home",
+      "dest": "/api/pages/home.php"
+    },
+    {
+      "src": "/blank",
+      "dest": "/api/pages/blank.php"
+    },
+    {
+      "src": "/(assets|styles|uploads)/(.*)",
+      "dest": "/$1/$2"
+    }
   ]
 }
